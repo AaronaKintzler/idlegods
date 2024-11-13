@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Web Game with Actions</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+        #mainContent {
+            display: none; /* Hide main content initially */
+        }
+        #lightButton {
+            padding: 20px;
+            font-size: 20px;
+            margin-top: 20%;
+            cursor: pointer;
+        }
+
+        #prayersDisplay {
+            font-size: 24px;
+            font-weight: bold;
+            position: fixed;
+            top: 10px;
+            left: 25%;
+            transform: translateX(-50%);
+            z-index: 1;
+            color: black;
+        }
+
+        canvas {
+            display: block;
+            margin: auto;
+        }
+        .action-button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .progress-bar {
+            position: relative;
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            margin: 5px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0;
+            background-color: #76c7c0;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            font-weight: bold;
+        }
+        .milestone {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Initial Button -->
+    <button id="lightButton" onclick="revealContent()">Let there be light</button>
+
+
+
+    <!-- Main Game Content -->
+    <div id="mainContent">
+        <h1>Idle Gods</h1>
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+        <!-- Prayers Display -->
+        <div id="prayersDisplay">Prayers: 0</div>
+
+        <!-- Action Buttons and Progress Bars -->
+        <div>
+            <div class="progress-bar"><div id="observeProgress" class="progress-fill">0%</div></div>
+            <button class="action-button" onclick="handleAction('Observe')">Observe</button>
+
+            <!-- Milestones for Observe progress -->
+            <div id="observeMilestones">
+                <div class="milestone" id="o_milestone1">1% ???</div>
+                <div class="milestone" id="o_milestone2">25% ???</div>
+                <div class="milestone" id="o_milestone3">50% ???</div>
+                <div class="milestone" id="o_milestone4">75% ???</div>
+                <div class="milestone" id="o_milestone5">100% ???</div>
+            </div>
+
+            <div class="progress-bar"><div id="riverbedProgress" class="progress-fill">0%</div></div>
+            <button class="action-button" onclick="handleAction('Riverbed')">Riverbed</button>
+            <div id="riverbedMilestones">
+                <div class="milestone" id="r_milestone1">1% ???</div>
+                <div class="milestone" id="r_milestone2">25% ???</div>
+                <div class="milestone" id="r_milestone3">50% ???</div>
+                <div class="milestone" id="r_milestone4">75% ???</div>
+                <div class="milestone" id="r_milestone5">100% ???</div>
+            </div>
+
+            <div class="progress-bar"><div id="wellProgress" class="progress-fill">0%</div></div>
+            <button class="action-button" onclick="handleAction('Well')">Well</button>
+            <div id="wellMilestones">
+                <div class="milestone" id="w_milestone1">1% ???</div>
+                <div class="milestone" id="w_milestone2">10% ???</div>
+                <div class="milestone" id="w_milestone3">50% ???</div>
+            </div>
+
+            <button class="action-button" onclick="handleAction('Small Miracle')">Small Miracle</button>
+            <button class="action-button" onclick="handleAction('Shrine')">Shrine</button>
+
+            <!-- Ascend and Prestige Buttons -->
+            <div>
+                <button class="action-button" onclick="handleAction('Ascend')">Ascend</button>
+            </div>
+            <div>
+                <button class="action-button" onclick="handleAction('Prestige')">Prestige</button>
+            </div>
+        </div>
+
+        <!-- ARIA live region for accessibility alerts -->
+        <div id="liveRegion" aria-live="assertive" style="position:absolute; left:-9999px;"></div>
+    </div>
+
+    <script src="game.js"></script>
+    <script>
+        let prayers = 0; // Initialize prayers variable
+
+        function revealContent() {
+            document.body.style.backgroundColor = 'white';
+            document.getElementById('lightButton').style.display = 'none'; // Hide the button
+            document.getElementById('mainContent').style.display = 'block'; // Show main content
+            document.body.style.color = 'black';
+
+            startPrayersCounter(); // Start counting prayers once content is revealed
+        }
+
+        function startPrayersCounter() {
+            setInterval(() => {
+                prayers += 1; // Increment prayers by 1
+                document.getElementById('prayersDisplay').textContent = `Prayers: ${prayers}`; // Update display
+            }, 1000); // Run every 1000 milliseconds (1 second)
+        }
+    </script>
+</body>
+</html>

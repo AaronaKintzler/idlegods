@@ -210,6 +210,13 @@ function updateWell(wellProgress) {
     }
 }
 
+function startPrayersCounter() {
+    setInterval(() => {
+        prayers += 1; // Increment prayers by 1
+        document.getElementById('prayersDisplay').textContent = `Prayers: ${prayers}`; // Update display
+    }, 1000); // Run every 1000 milliseconds (1 second)
+}
+
 // Key down event
 window.addEventListener('keydown', (e) => {
     keys[e.key] = true;
@@ -223,6 +230,8 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', (e) => {
     keys[e.key] = false;
 });
+
+
 
 // Start the game loop after the image loads
 backgroundImage.onload = () => {

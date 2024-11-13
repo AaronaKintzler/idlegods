@@ -23,6 +23,8 @@ Large:
 
 -Moving to next area (abstract town down to a button?)
 
+-Saving the game so it doesn't restart on every launch. 
+
 
 
 Finished. (Move items here when done)
